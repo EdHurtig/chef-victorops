@@ -1,31 +1,47 @@
-# victorops [![Build Status](https://travis-ci.org/evertrue/victorops-cookbook.svg)](https://travis-ci.org/evertrue/victorops-cookbook)
+# victorops [![Build Status](https://travis-ci.org/edhurtig/chef-victorops.svg)](https://travis-ci.org/edhurtig/chef-victorops)
 
-TODO: Enter the cookbook description here.
-
-# Requirements
-
-* `apt` cookbook
-* `some` cookbook
-* `another` cookbook
-
+Adds LWRPs for reporting to VictorOps during a chef-client run
 
 # Recipes
 
 ## default
 
-Short Description
+Configures a few default endpoints if specified in the `node['victorops']['endpoints']` hash
 
-1. Set up & updates apt using `apt::default`
-2. Install xyz by some proccess
-3. Include various recipes for this cookbook:
-    * `victorops::install`
-        - which includes `victorops::another`
-    * `victorops::configure`
+# Resources
 
-## install
+## `victorops_endpoint`
 
-More info about the install recipe
+```ruby
+victorops_endpoint "disk_space.warning/#{node['fqdn']}" do
+   routing_key 'ops'
+   action :warning
+end
+```
 
+**Attributes**
+
+Most of these attributes map to fields for the [VictorOps REST API](http://victorops.force.com/knowledgebase/articles/Integration/Alert-Ingestion-API-Documentation/)
+
+* `name` String (name attribute)
+  * The entity_id for the incident    
+* `routing_key` String. Default `node['victorops']['routing_key']`
+  * The Routing Key for the Incident. 
+* `api_key` String.  Default `node['victorops']['api_key']`
+  * Your Victorops API Key.  
+* `state_message` String.  Default `node['victorops']['state_message']`
+  * The message to pass into the incident report 
+* `entity_is_host` Boolean.  Default `node['victorops']['entity_is_host']`
+  * Used within VictorOps to select the appropriate display format for the incident.
+* `monitoring_tool` String.  Default `node['victorops']['monitoring_tool']`
+  * Used within VictorOps to select the appropriate display format for the incident.
+* `entity_display_name` Boolean.  Default `node['victorops']['entity_display_name']`
+  * Used within VictorOps to select the appropriate display format for the incident.
+* `state_start_time` Integer. 
+  * The time that the problem started.  Defaults to the current time
+* `base_url` String.  Default `node['victorops']['base_url']`
+  * The base URL to the Victorops API
+`
 # Usage
 
 Include this recipe in a wrapper cookbook:
