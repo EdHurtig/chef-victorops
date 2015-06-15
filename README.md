@@ -16,6 +16,11 @@ Configures a few default endpoints if specified in the `node['victorops']['endpo
 victorops_endpoint "disk_space.warning/#{node['fqdn']}" do
    routing_key 'ops'
    action :warning
+   only_if { ... }
+end
+
+some_resource 'bleah' do 
+    notifies :critical, "victorops_endpoint[disk_space.warning/#{node['fqdn']}]"
 end
 ```
 
