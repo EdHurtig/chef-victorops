@@ -1,4 +1,4 @@
-# victorops [![Build Status](https://travis-ci.org/edhurtig/chef-victorops.svg)](https://travis-ci.org/edhurtig/chef-victorops)
+# victorops [![Build Status](https://travis-ci.org/EdHurtig/chef-victorops.svg)](https://travis-ci.org/EdHurtig/chef-victorops)
 
 Adds LWRPs for reporting to VictorOps during a chef-client run
 
