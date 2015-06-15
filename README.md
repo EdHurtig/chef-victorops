@@ -20,7 +20,7 @@ victorops_endpoint "disk_space.warning/#{node['fqdn']}" do
 end
 
 some_resource 'bleah' do 
-    notifies :critical, "victorops_endpoint[disk_space.warning/#{node['fqdn']}]"
+    notifies :warning, "victorops_endpoint[disk_space.warning/#{node['fqdn']}]"
 end
 ```
 
